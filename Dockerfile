@@ -33,13 +33,15 @@ RUN mv ./imgui-picagl-temp/imgui-picagl-* ./imgui-picagl
 
 # ----- Install dependencies -----
 
-# Install picaGL
+# Install picaGL. Use the longer line to build with GDB-optimized debug data included.
 WORKDIR /tmp/picagl
-RUN make all install > /docker_logs/make_picagl.txt
+RUN make install > /docker_logs/make_picagl.txt
+# RUN make install ARCH="-ggdb -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft" > /docker_logs/make_picagl.txt
 
-# Install imgui-picagl. MUST build after picaGL!
+# Install imgui-picagl. MUST build after picaGL! Use the longer line to build with GDB-optimized debug data included.
 WORKDIR /tmp/imgui-picagl
 RUN make install > /docker_logs/make_imgui-picagl.txt
+# RUN make install ARCH="-ggdb -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft" > /docker_logs/make_imgui-picagl.txt
 
 # Install makerom
 WORKDIR /tmp
