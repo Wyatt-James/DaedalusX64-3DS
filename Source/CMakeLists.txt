@@ -312,6 +312,10 @@ endif (VITA_RELEASE)
 
 if (CTR_RELEASE)
 	message("N3DS Release Build..")
+	
+	# Debugging stuff
+	# set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -save-temps=obj -ggdb")
+	# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -save-temps=obj -ggdb")
 
 	set(CMAKE_EXE_LINKER_FLAGS "-L${DEVKITPRO}/libctru/lib -L${DEVKITPRO}/picaGL/lib -L${DEVKITPRO}/portlibs/3ds/lib -specs=3dsx.specs -Wl,--gc-sections")
 

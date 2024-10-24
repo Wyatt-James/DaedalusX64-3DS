@@ -1,5 +1,7 @@
 #!/bin/bash
 
+kOBJ_SYMLINK_SRC=./CMakeFiles/daedalus.dir
+kOBJ_SYMLINK_DST=./Source
 
 function usage() {
     echo "Usage ./build_daedalus.sh BUILD_TYPE"
@@ -98,3 +100,22 @@ elif [ "$1" = "LINUX_RELEASE" ] || [ "$1" = "MAC_RELEASE" ]; then
 else
   usage
 fi
+
+# VSCode can only resolve file paths relative to the project base dir, so we need to mirror that
+# in order to use Disassembly Explorer. C/CPP files are in the Source directory, so we make a symlink
+# whose path contains "Source/<gcc/g++ intermediates>"
+if [ ! -d "$kOBJ_SYMLINK_DST" ]; then
+
+  # We are already in the daedbuild directory
+  echo "Creating OBJ symlink from $kOBJ_SYMLINK_SRC to $kOBJ_SYMLINK_DST"
+  ln -s "$kOBJ_SYMLINK_SRC" "$kOBJ_SYMLINK_DST"
+
+  if [[ $? == 0 ]]; then
+    echo "Symlink created successfully."
+  else
+    echo "Could not create symlink."
+  fi
+else
+  echo "OBJ symlink already exists from $kOBJ_SYMLINK_SRC to $kOBJ_SYMLINK_DST"
+fi
+
