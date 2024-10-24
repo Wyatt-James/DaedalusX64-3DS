@@ -5,7 +5,7 @@
 
 #include "MemoryCTR.h"
 
-typedef int (*ctr_callback_type)(void);
+typedef s32 ctr_callback_type;
 
 int __stacksize__ = 2 * 1024 * 1024;
 
@@ -17,7 +17,7 @@ static unsigned int s1, s2, s3, s0;
 // Internal function that enables all services. This must be run via
 // svcBackdoor.
 //-----------------------------------------------------------------------------
-static void ctrEnableAllServices(void)
+static ctr_callback_type ctrEnableAllServices(void)
 {
 	__asm__ volatile("cpsid aif");
 
@@ -41,9 +41,9 @@ static void ctrEnableAllServices(void)
 //-----------------------------------------------------------------------------
 int _SetMemoryPermission(void *buffer, int size, int permission)
 {
-	unsigned int currentHandle;
+	Handle currentHandle;
 	svcDuplicateHandle(&currentHandle, 0xFFFF8001);
-	int res = svcControlProcessMemory(currentHandle, buffer, 0, size, MEMOP_PROT, permission);
+	int res = svcControlProcessMemory(currentHandle, (u32) buffer, 0, size, MEMOP_PROT, permission);
 	svcCloseHandle(currentHandle);
 
 	return res;
@@ -58,8 +58,8 @@ int _SetMemoryPermission(void *buffer, int size, int permission)
 //-----------------------------------------------------------------------------
 int _InitializeSvcHack(void)
 {
-		svcBackdoor((ctr_callback_type)ctrEnableAllServices);
-		svcBackdoor((ctr_callback_type)ctrEnableAllServices);
+		svcBackdoor(ctrEnableAllServices);
+		svcBackdoor(ctrEnableAllServices);
 
 #if 0
 		printf("svc_access_control: %x %x %x %x\n", s0, s1, s2, s3);

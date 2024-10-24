@@ -23,3 +23,16 @@ rom.db
 .svn/
 Source/tmp
 Source/build
+
+# Scripts and script support
+/build_flags.txt
+/build_scripts
+/build_scripts/*
+
+# Logging
+/build_logs
+/build_logs/*
+
+# IDE
+.vscode
+.vscode/*

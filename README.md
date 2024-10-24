@@ -7,7 +7,19 @@ DaedalusX64 is a Nintendo 64 emulator for 3DS, Linux, PSP, PS Vita among other p
 To install Daedalus to your 3DS, download the latest release from the Releases page: https://github.com/MasterFeizz/daedalusX64-3DS/releases
  
 Next, extract the data.zip to the root of your sd card. Place your ROM files in sdmc:/3ds/DaedalusX64/Roms/ and they will automatically appear in Daedalus.
- 
+
+### Compiling from Source on Windows
+
+The simplest way to build Daedalus from source is with the provided Dockerfile. See [this](/BUILD_DOCKER_WSL2.md) guide.
+
+If you do not wish to use Docker, see [this](/BUILD_WSL2.md) guide.
+
+## Compiling from Source on Linux
+
+The Docker workflow has not been tested on native Linux, but it should work. See [this](/BUILD_DOCKER_WSL2.md) guide and adapt to your native Linux installation.
+
+If you do not wish to use Docker, see [this](/BUILD_UBUNTU.md) guide.
+
 ## Credits
 
 - cmf028: Major contributer of the ARM DynaRec code
@@ -19,3 +31,4 @@ Next, extract the data.zip to the root of your sd card. Place your ROM files in 
 - mrneo240: Optimizations, compilation help
 - TheMrIron2: Optimizations, wiki maintenance
 - MrHuu: Icon, banner
+- Wyatt-James: Docker workflow, Documentation

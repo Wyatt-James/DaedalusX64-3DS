@@ -317,7 +317,7 @@ if (CTR_RELEASE)
 
 	include_directories(${DEVKITPRO}/libctru/include ${DEVKITPRO}/picaGL/include ${DEVKITPRO}/portlibs/3ds/include)
 
-	add_definitions("-DDAEDALUS_CTR" "-D_3DS")
+	add_definitions("-DDAEDALUS_CTR" "-D__3DS__")
 
 	# Build Daedalus Lib
 	add_library(daedalus STATIC
